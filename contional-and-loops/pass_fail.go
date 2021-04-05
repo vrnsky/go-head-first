@@ -5,20 +5,29 @@ import (
 	"fmt"
 	"log"
 	"os"
-        "strconv"
+	"strconv"
+        "strings"
 )
 
 func main() {
 	var grade float64
-	fmt.Print("Enter a grade:")
+        var status string
+	fmt.Print("Enter a grade: ")
 	reader := bufio.NewReader(os.Stdin)
 	input, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatal(err)
 	}
+        input = strings.TrimSpace(input)
 	grade, err = strconv.ParseFloat(input, 64)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(grade)
+	if grade >= 60 {
+		status = "passing"
+	} else {
+		status = "failing"
+	}
+
+	fmt.Println("A grade of", grade, "is", status)
 }
